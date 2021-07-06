@@ -1,0 +1,7 @@
+suites:
+  default:
+    namespace: App
+    psr4_prefix:
+    src_path: app
+    spec_path: tests
+    spec_prefix: PhpSpec
