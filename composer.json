@@ -24,6 +24,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "Sailfish\\": "src/Sailfish",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
@@ -44,6 +45,9 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "rey": [
+            "@php src/Sailfish/Rey/Console/bin/rey.php"
         ]
     },
     "extra": {

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http;
+namespace Sailfish\Ivvy\Kernel\Http;
 
-use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Sailfish\Shared\Kernel\Http\HttpKernel as SharedHttpKernel;
 
-class Kernel extends HttpKernel
+class HttpKernel extends SharedHttpKernel
 {
     /**
      * The application's global HTTP middleware stack.

@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Contracts\Http\Kernel as HttpKernelInterface;
 use Illuminate\Http\Request;
+use Sailfish\Rey\Application\Bootstrap\ReyBootstrap;
 
 define('LARAVEL_START', microtime(true));
-
+define('APPLICATION', 'REY');
 /*
 |--------------------------------------------------------------------------
 | Check If The Application Is Under Maintenance
@@ -16,8 +17,8 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
-    require __DIR__.'/../storage/framework/maintenance.php';
+if (file_exists(__DIR__.'/../../storage/framework/maintenance.php')) {
+    require __DIR__.'/../../storage/framework/maintenance.php';
 }
 
 /*
@@ -31,7 +32,7 @@ if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -44,9 +45,10 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+$ivvyApp = new ReyBootstrap($_ENV['APP_BASE_PATH'] ?? dirname(dirname(__DIR__)));
+$ivvyApp->bindBaseInterfaces();
 
-$kernel = $app->make(Kernel::class);
+$kernel = $ivvyApp->make(HttpKernelInterface::class);
 
 $response = tap($kernel->handle(
     $request = Request::capture()
